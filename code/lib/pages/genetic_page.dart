@@ -16,6 +16,7 @@ class __GeneticPageState extends State<GeneticPage> {
   double x3;
   double x4;
   int time;
+  int mutations;
 
   final aController = TextEditingController();
   final bController = TextEditingController();
@@ -138,7 +139,8 @@ class __GeneticPageState extends State<GeneticPage> {
               var y = int.parse(yController.text);
 
               var startDate = DateTime.now().microsecondsSinceEpoch;
-              var result = new Genetics().diophantineEquation(
+              var gen = new Genetics();
+              var result = gen.diophantineEquation(
                   equation: [a, b, c, d, y], populationSize: 10);
               print(result.length);
               if (result.length == 4) {
@@ -148,6 +150,7 @@ class __GeneticPageState extends State<GeneticPage> {
                   x3 = result[2].toDouble();
                   x4 = result[3].toDouble();
                   time = DateTime.now().microsecondsSinceEpoch - startDate;
+                  mutations = gen.mutationCount;
                 });
               }
             },
@@ -180,6 +183,11 @@ class __GeneticPageState extends State<GeneticPage> {
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Text('time: ${this.time ?? '-'}',
+                  style: TextStyle(fontSize: 20)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text('Mutations: ${this.mutations ?? '-'} (max fitness)',
                   style: TextStyle(fontSize: 20)),
             ),
           ],
