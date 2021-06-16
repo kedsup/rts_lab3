@@ -13,6 +13,7 @@ class FermaPage extends StatefulWidget {
 class __FermaPageState extends State<FermaPage> {
   int a;
   int b;
+  int iterations;
 
   final myController = TextEditingController();
 
@@ -56,6 +57,11 @@ class __FermaPageState extends State<FermaPage> {
                   style: TextStyle(fontSize: 20)),
             ),
             Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text('Iterations: ${this.iterations ?? '-'}',
+                  style: TextStyle(fontSize: 20)),
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                 onPressed: () {
@@ -65,6 +71,7 @@ class __FermaPageState extends State<FermaPage> {
                   setState(() {
                     a = result[0][0].toInt();
                     b = result[0][1].toInt();
+                    iterations = result[1];
                   });
                 },
                 child: const Text('Submit'),
