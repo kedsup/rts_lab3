@@ -15,13 +15,13 @@ class Genetics {
 
   int fitnes(var genes, var d, int y) {
     int index = 0;
-    var value = 0;
+    var maxValue = 0;
     genes.forEach((element) {
-      value += (element * d[index]);
-      index++;
-      return value;
+      if (element * d[index] > maxValue) {
+        maxValue = element * d[index];
+      }
     });
-    return (y - value).abs();
+    return (y - (maxValue * genes.length)).abs();
   }
 
   calculateProbability(var deltas) {
